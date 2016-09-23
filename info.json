@@ -1,0 +1,11 @@
+{
+	"name": "circuit-network-switch",
+	"version": "0.1.2",
+	"factorio_version": "0.14",
+	"title": "Circuit Network Switch",
+	"author": "TheRustyKnife",
+	"description": "Like the power switch but with red and green wires. Proof-of-concept stage - looking for feedback!",
+	"homepage": "http://mods.factorio.com/mods/theRustyKnife/circuit-network-switch",
+	"date": "22.09.2016",
+	"dependencies": []
+}

@@ -1,0 +1,9 @@
+##0.1.0##
++ Initial release
+
+##0.1.1##
++ Added proper recipe and tech
++ Added locale
+
+##0.1.2##
+* Minor performance improvement
