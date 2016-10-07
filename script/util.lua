@@ -2,7 +2,8 @@ local util = {}
 
 function util.destroy_proxies(switch)
 	for _, v in pairs(switch.proxies) do
-		v.destroy()
+		v.out.destroy()
+		v.inner.destroy()
 	end
 end
 
@@ -14,14 +15,27 @@ function util.create_proxies(switch)
 end
 
 function util.create_proxy(switch, offset)
-	local res = switch.surface.create_entity{
+	local res = {}
+	res.out = switch.surface.create_entity{
 		name = "circuit-network-switch-proxy",
 		position = {switch.position.x + offset.x, switch.position.y + offset.y},
 		force = switch.force
 	}
 	
-	res.destructible = false
-	res.operable = false
+	res.inner = switch.surface.create_entity{
+		name = "circuit-network-switch-proxy-trans",
+		position = {switch.position.x + offset.x, switch.position.y + offset.y},
+		force = switch.force
+	}
+	
+	res.out.destructible = false
+	res.out.operable = false
+	
+	res.inner.destructible = false
+	res.inner.operable = false
+	
+	res.inner.connect_neighbour{target_entity = res.out, wire = defines.wire_type.red}
+	res.inner.connect_neighbour{target_entity = res.out, wire = defines.wire_type.green}
 	
 	return res
 end

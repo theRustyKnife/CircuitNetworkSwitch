@@ -4,7 +4,9 @@ function on_built(event)
 	if event.created_entity.name == "circuit-network-switch"then
 		local res = {
 			switch = event.created_entity,
-			proxies = util.create_proxies(event.created_entity)
+			proxies = util.create_proxies(event.created_entity),
+			state = true,
+			control_behavior = switch.get_or_create_control_behavior()
 		}
 		table.insert(global.switches, res)
 	end
@@ -21,11 +23,21 @@ function on_destroyed(event)
 end
 
 local method = {[true] = 'disconnect_neighbour', [false] = 'connect_neighbour'}
+local red_args = {wire = defines.wire_type.red}
+local green_args = {wire = defines.wire_type.green}
 script.on_event(defines.events.on_tick, function(event)
+	local state
 	for _, v in pairs(global.switches) do
-		local state = v.switch.get_or_create_control_behavior().disabled
-		v.proxies[1][method[state]]{target_entity = v.proxies[2], wire = defines.wire_type.red}
-		v.proxies[1][method[state]]{target_entity = v.proxies[2], wire = defines.wire_type.green}
+		state = v.control_behavior.disabled
+		if state ~= v.state then
+			v.state = state
+			
+			red_args.target_entity = v.proxies[2].inner
+			green_args.target_entity = v.proxies[2].inner
+			
+			v.proxies[1].inner[method[state]](red_args)
+			v.proxies[1].inner[method[state]](green_args)
+		end
 	end
 end)
 

@@ -2,6 +2,166 @@ data:extend({
 	--proxies for the wires to be switched
 	{
 		type = "constant-combinator",
+		name = "circuit-network-switch-proxy-trans",
+		icon = "__circuit-network-switch__/graphics/trans.png",
+		flags = {"placeable-neutral", "player-creation"},
+		selectable_in_game = false,
+		max_health = 100000,
+		order = "itsdafirstman",
+		
+		collision_box = {{-0.35, -0.35}, {0.35, 0.35}},
+		selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
+
+		item_slot_count = 0,
+
+		sprites =
+		{
+			north =
+			{
+				filename = "__circuit-network-switch__/graphics/trans.png",
+				x = 0,
+				y = 0,
+				width = 0,
+				height = 0,
+				frame_count = 1,
+				shift = {0.140625, 0.140625},
+			},
+			east =
+			{
+				filename = "__circuit-network-switch__/graphics/trans.png",
+				y = 0,
+				width = 0,
+				height = 0,
+				frame_count = 1,
+				shift = {0.140625, 0.140625},
+			},
+			south =
+			{
+				filename = "__circuit-network-switch__/graphics/trans.png",
+				x = 0,
+				y = 0,
+				width = 0,
+				height = 0,
+				frame_count = 1,
+				shift = {0.140625, 0.140625},
+			},
+			west =
+			{
+				filename = "__circuit-network-switch__/graphics/trans.png",
+				y = 0,
+				width = 0,
+				height = 0,
+				frame_count = 1,
+				shift = {0.140625, 0.140625},
+			}
+		},
+
+		activity_led_sprites =
+		{
+			north =
+			{
+				filename = "__circuit-network-switch__/graphics/trans.png",
+				width = 0,
+				height = 0,
+				frame_count = 1,
+				shift = {0.296875, -0.40625},
+			},
+			east =
+			{
+				filename = "__circuit-network-switch__/graphics/trans.png",
+				width = 0,
+				height = 0,
+				frame_count = 1,
+				shift = {0.25, -0.03125},
+			},
+			south =
+			{
+				filename = "__circuit-network-switch__/graphics/trans.png",
+				width = 0,
+				height = 0,
+				frame_count = 1,
+				shift = {-0.296875, -0.078125},
+			},
+			west =
+			{
+				filename = "__circuit-network-switch__/graphics/trans.png",
+				width = 0,
+				height = 0,
+				frame_count = 1,
+				shift = {-0.21875, -0.46875},
+			}
+		},
+
+		activity_led_light =
+		{
+			intensity = 0,
+			size = 0,
+		},
+
+		activity_led_light_offsets =
+		{
+			{0.296875, -0.40625},
+			{0.25, -0.03125},
+			{-0.296875, -0.078125},
+			{-0.21875, -0.46875}
+		},
+
+		circuit_wire_connection_points =
+		{
+			{
+				shadow =
+				{
+					red = {0.15625, -0.28125},
+					green = {0.65625, -0.25}
+				},
+				wire =
+				{
+					red = {-0.28125, -0.5625},
+					green = {0.21875, -0.5625},
+				}
+			},
+			{
+				shadow =
+				{
+					red = {0.75, -0.15625},
+					green = {0.75, 0.25},
+				},
+				wire =
+				{
+					red = {0.46875, -0.5},
+					green = {0.46875, -0.09375},
+				}
+			},
+			{
+				shadow =
+				{
+					red = {0.75, 0.5625},
+					green = {0.21875, 0.5625}
+				},
+				wire =
+				{
+					red = {0.28125, 0.15625},
+					green = {-0.21875, 0.15625}
+				}
+			},
+			{
+				shadow =
+				{
+					red = {-0.03125, 0.28125},
+					green = {-0.03125, -0.125},
+				},
+				wire =
+				{
+					red = {-0.46875, 0},
+					green = {-0.46875, -0.40625},
+				}
+			}
+		},
+
+		circuit_wire_max_distance = 7.5
+	},
+	{
+		type = "constant-combinator",
 		name = "circuit-network-switch-proxy",
 		icon = "__circuit-network-switch__/graphics/trans.png",
 		flags = {"placeable-neutral", "player-creation"},
@@ -177,11 +337,11 @@ data:extend({
 			type = "electric",
 			usage_priority = "secondary-input"
 		},
-		energy_usage_per_tick = "5KW",
-		light = {intensity = 0.9, size = 40},
-		light_when_colored = {intensity = 1, size = 6},
-		glow_size = 6,
-		glow_color_intensity = 0.135,
+		energy_usage_per_tick = "1KW",
+		--light = {intensity = 0.9, size = 40},
+		--light_when_colored = {intensity = 1, size = 6},
+		--glow_size = 6,
+		--glow_color_intensity = 0.135,
 		picture_off =
 		{
 			filename = "__base__/graphics/entity/small-lamp/light-off.png",

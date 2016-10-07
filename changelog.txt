@@ -7,3 +7,8 @@
 
 ##0.1.2##
 * Minor performance improvement
+
+##0.1.3##
+* Switches don't emit light when on anymore
+* Reduced energy usage to 1kW to match the other combinators
+* Performance improvement
