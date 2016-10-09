@@ -9,35 +9,34 @@ end
 
 function util.create_proxies(switch)
 	return {
-		util.create_proxy(switch, {x = 1, y = 0}),
-		util.create_proxy(switch, {x = -1, y = 0})
+		util.create_proxy(switch, {x = 1, y = 0}, defines.direction.west),
+		util.create_proxy(switch, {x = -1, y = 0}, defines.direction.east)
 	}
 end
 
-function util.create_proxy(switch, offset)
-	local res = {}
-	res.out = switch.surface.create_entity{
+function util.create_proxy(switch, offset, direction)
+	local out = switch.surface.create_entity{
 		name = "circuit-network-switch-proxy",
 		position = {switch.position.x + offset.x, switch.position.y + offset.y},
 		force = switch.force
 	}
+	out.destructible = false
+	out.operable = false
+	out.direction = direction
 	
-	res.inner = switch.surface.create_entity{
+	local inner = switch.surface.create_entity{
 		name = "circuit-network-switch-proxy-trans",
-		position = {switch.position.x + offset.x, switch.position.y + offset.y},
+		position = {switch.position.x, switch.position.y},
 		force = switch.force
 	}
+	inner.destructible = false
+	inner.operable = false
+	inner.direction = defines.direction.south
 	
-	res.out.destructible = false
-	res.out.operable = false
+	inner.connect_neighbour{target_entity = out, wire = defines.wire_type.red}
+	inner.connect_neighbour{target_entity = out, wire = defines.wire_type.green}
 	
-	res.inner.destructible = false
-	res.inner.operable = false
-	
-	res.inner.connect_neighbour{target_entity = res.out, wire = defines.wire_type.red}
-	res.inner.connect_neighbour{target_entity = res.out, wire = defines.wire_type.green}
-	
-	return res
+	return {out = out, inner = inner}
 end
 
 function util.find_switch_in_global(switch)

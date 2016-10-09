@@ -6,7 +6,7 @@ function on_built(event)
 			switch = event.created_entity,
 			proxies = util.create_proxies(event.created_entity),
 			state = true,
-			control_behavior = switch.get_or_create_control_behavior()
+			control_behavior = event.created_entity.get_or_create_control_behavior()
 		}
 		table.insert(global.switches, res)
 	end

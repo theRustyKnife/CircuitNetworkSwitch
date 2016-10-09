@@ -12,3 +12,7 @@
 * Switches don't emit light when on anymore
 * Reduced energy usage to 1kW to match the other combinators
 * Performance improvement
+
+##0.1.4##
++ Added some sprites (bastardized deciders)
+* Fixed a crash?

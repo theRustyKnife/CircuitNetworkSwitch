@@ -10,8 +10,8 @@ data:extend({
 		order = "itsdafirstman",
 		
 		collision_box = {{-0.35, -0.35}, {0.35, 0.35}},
-		selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
-
+		collision_mask = {},
+		
 		item_slot_count = 0,
 
 		sprites =
@@ -123,13 +123,13 @@ data:extend({
 			{
 				shadow =
 				{
-					red = {0.75, -0.15625},
-					green = {0.75, 0.25},
+					red = {0.15, -0.15625},
+					green = {0.15, 0.25},
 				},
 				wire =
 				{
-					red = {0.46875, -0.5},
-					green = {0.46875, -0.09375},
+					red = {-0.13125, -0.5},
+					green = {-0.13125, -0.09375},
 				}
 			},
 			{
@@ -147,18 +147,18 @@ data:extend({
 			{
 				shadow =
 				{
-					red = {-0.03125, 0.28125},
-					green = {-0.03125, -0.125},
+					red = {0.56875, 0.28125},
+					green = {0.56875, -0.125},
 				},
 				wire =
 				{
-					red = {-0.46875, 0},
-					green = {-0.46875, -0.40625},
+					red = {0.13125, -0.05},
+					green = {0.13125, -0.50625},
 				}
 			}
 		},
-
-		circuit_wire_max_distance = 7.5
+		
+		circuit_wire_max_distance = 3,
 	},
 	{
 		type = "constant-combinator",
@@ -169,6 +169,7 @@ data:extend({
 		order = "itsdafirstman",
 		
 		collision_box = {{-0.35, -0.35}, {0.35, 0.35}},
+		collision_mask = {},
 		selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
 
 		item_slot_count = 0,
@@ -177,40 +178,40 @@ data:extend({
 		{
 			north =
 			{
-				filename = "__base__/graphics/entity/combinator/combinator-entities.png",
-				x = 158,
-				y = 126,
-				width = 79,
-				height = 63,
+				filename = "__circuit-network-switch__/graphics/trans.png",
+				x = 0,
+				y = 0,
+				width = 0,
+				height = 0,
 				frame_count = 1,
 				shift = {0.140625, 0.140625},
 			},
 			east =
 			{
-				filename = "__base__/graphics/entity/combinator/combinator-entities.png",
-				y = 126,
-				width = 79,
-				height = 63,
+				filename = "__circuit-network-switch__/graphics/trans.png",
+				y = 0,
+				width = 0,
+				height = 0,
 				frame_count = 1,
 				shift = {0.140625, 0.140625},
 			},
 			south =
 			{
-				filename = "__base__/graphics/entity/combinator/combinator-entities.png",
-				x = 237,
-				y = 126,
-				width = 79,
-				height = 63,
+				filename = "__circuit-network-switch__/graphics/trans.png",
+				x = 0,
+				y = 0,
+				width = 0,
+				height = 0,
 				frame_count = 1,
 				shift = {0.140625, 0.140625},
 			},
 			west =
 			{
-				filename = "__base__/graphics/entity/combinator/combinator-entities.png",
-				x = 79,
-				y = 126,
-				width = 79,
-				height = 63,
+				filename = "__circuit-network-switch__/graphics/trans.png",
+				x = 0,
+				y = 0,
+				width = 0,
+				height = 0,
 				frame_count = 1,
 				shift = {0.140625, 0.140625},
 			}
@@ -220,33 +221,33 @@ data:extend({
 		{
 			north =
 			{
-				filename = "__base__/graphics/entity/combinator/activity-leds/combinator-led-constant-north.png",
-				width = 11,
-				height = 10,
+				filename = "__circuit-network-switch__/graphics/trans.png",
+				width = 0,
+				height = 0,
 				frame_count = 1,
 				shift = {0.296875, -0.40625},
 			},
 			east =
 			{
-				filename = "__base__/graphics/entity/combinator/activity-leds/combinator-led-constant-east.png",
-				width = 14,
-				height = 12,
+				filename = "__circuit-network-switch__/graphics/trans.png",
+				width = 0,
+				height = 0,
 				frame_count = 1,
 				shift = {0.25, -0.03125},
 			},
 			south =
 			{
-				filename = "__base__/graphics/entity/combinator/activity-leds/combinator-led-constant-south.png",
-				width = 11,
-				height = 11,
+				filename = "__circuit-network-switch__/graphics/trans.png",
+				width = 0,
+				height = 0,
 				frame_count = 1,
 				shift = {-0.296875, -0.078125},
 			},
 			west =
 			{
-				filename = "__base__/graphics/entity/combinator/activity-leds/combinator-led-constant-west.png",
-				width = 12,
-				height = 12,
+				filename = "__circuit-network-switch__/graphics/trans.png",
+				width = 0,
+				height = 0,
 				frame_count = 1,
 				shift = {-0.21875, -0.46875},
 			}
@@ -254,8 +255,8 @@ data:extend({
 
 		activity_led_light =
 		{
-			intensity = 0.8,
-			size = 1,
+			intensity = 0,
+			size = 0,
 		},
 
 		activity_led_light_offsets =
@@ -283,13 +284,13 @@ data:extend({
 			{
 				shadow =
 				{
-					red = {0.75, -0.15625},
-					green = {0.75, 0.25},
+					red = {0.15, -0.15625},
+					green = {0.15, 0.25},
 				},
 				wire =
 				{
-					red = {0.46875, -0.5},
-					green = {0.46875, -0.09375},
+					red = {-0.13125, -0.5},
+					green = {-0.13125, -0.09375},
 				}
 			},
 			{
@@ -307,13 +308,13 @@ data:extend({
 			{
 				shadow =
 				{
-					red = {-0.03125, 0.28125},
-					green = {-0.03125, -0.125},
+					red = {0.56875, 0.28125},
+					green = {0.56875, -0.125},
 				},
 				wire =
 				{
-					red = {-0.46875, 0},
-					green = {-0.46875, -0.40625},
+					red = {0.13125, -0.05},
+					green = {0.13125, -0.50625},
 				}
 			}
 		},
@@ -338,40 +339,30 @@ data:extend({
 			usage_priority = "secondary-input"
 		},
 		energy_usage_per_tick = "1KW",
-		--light = {intensity = 0.9, size = 40},
-		--light_when_colored = {intensity = 1, size = 6},
-		--glow_size = 6,
-		--glow_color_intensity = 0.135,
+		
 		picture_off =
 		{
-			filename = "__base__/graphics/entity/small-lamp/light-off.png",
+			filename = "__circuit-network-switch__/graphics/switch/horizontal-off.png",
 			priority = "high",
-			width = 67,
-			height = 58,
+			width = 105,
+			height = 51,
 			frame_count = 1,
 			axially_symmetrical = false,
 			direction_count = 1,
-			shift = {-0.015625, 0.15625},
+			scale = 0.9,
+			shift = {0.2, -0.1},
 		},
 		picture_on =
 		{
-			filename = "__base__/graphics/entity/small-lamp/light-on-patch.png",
+			filename = "__circuit-network-switch__/graphics/switch/horizontal-on.png",
 			priority = "high",
-			width = 62,
-			height = 62,
+			width = 105,
+			height = 51,
 			frame_count = 1,
 			axially_symmetrical = false,
 			direction_count = 1,
-			shift = {-0.03125, -0.03125},
-		},
-		signal_to_color_mapping =
-		{
-			{signal="signal-red", color={r=1,g=0,b=0}},
-			{signal="signal-green", color={r=0,g=1,b=0}},
-			{signal="signal-blue", color={r=0,g=0,b=1}},
-			{signal="signal-yellow", color={r=1,g=1,b=0}},
-			{signal="signal-pink", color={r=1,g=0,b=1}},
-			{signal="signal-cyan", color={r=0,g=1,b=1}},
+			scale = 0.9,
+			shift = {0.2, -0.1},
 		},
 
 		circuit_wire_connection_point =
@@ -383,11 +374,10 @@ data:extend({
 			},
 			wire =
 			{
-				red = {0.40625, 0.34375},
-				green = {0.40625, 0.5},
+				red = {-0.25, -0.65},
+				green = {0.25, -0.65},
 			}
 		},
-		circuit_connector_sprites = get_circuit_connector_sprites({0.1875, 0.28125}, {0.1875, 0.28125}, 18),
 		circuit_wire_max_distance = 7.5
 	},
 	{
