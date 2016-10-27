@@ -1,18 +1,23 @@
-##0.1.0##
-+ Initial release
+##0.1.5##
++ Added base dependency
++ Allowed rotation and added vertical sprites
+* Reversed the order of changelog to prevent unnecessary scrolling
 
-##0.1.1##
-+ Added proper recipe and tech
-+ Added locale
-
-##0.1.2##
-* Minor performance improvement
+##0.1.4##
++ Added some sprites (bastardized deciders)
+* Fixed a crash?
 
 ##0.1.3##
 * Switches don't emit light when on anymore
 * Reduced energy usage to 1kW to match the other combinators
 * Performance improvement
 
-##0.1.4##
-+ Added some sprites (bastardized deciders)
-* Fixed a crash?
+##0.1.2##
+* Minor performance improvement
+
+##0.1.1##
++ Added proper recipe and tech
++ Added locale
+
+##0.1.0##
++ Initial release

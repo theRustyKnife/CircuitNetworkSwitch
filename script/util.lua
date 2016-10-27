@@ -7,7 +7,13 @@ function util.destroy_proxies(switch)
 	end
 end
 
-function util.create_proxies(switch)
+function util.create_proxies(switch, direction)
+	if direction then
+		return {
+			util.create_proxy(switch, {x = 0, y = 1}, defines.direction.south),
+			util.create_proxy(switch, {x = 0, y = -1}, defines.direction.north)
+		}
+	end
 	return {
 		util.create_proxy(switch, {x = 1, y = 0}, defines.direction.west),
 		util.create_proxy(switch, {x = -1, y = 0}, defines.direction.east)
@@ -32,6 +38,9 @@ function util.create_proxy(switch, offset, direction)
 	inner.destructible = false
 	inner.operable = false
 	inner.direction = defines.direction.south
+	if direction == defines.direction.north or direction == defines.direction.south then
+		inner.direction = defines.direction.north
+	end
 	
 	inner.connect_neighbour{target_entity = out, wire = defines.wire_type.red}
 	inner.connect_neighbour{target_entity = out, wire = defines.wire_type.green}

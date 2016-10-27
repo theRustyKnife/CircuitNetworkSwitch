@@ -1,19 +1,36 @@
 util = require "util"
 
 function on_built(event)
-	if event.created_entity.name == "circuit-network-switch"then
+	if event.created_entity.name == "circuit-network-switch-place-proxy" then
+		local switch
+		if event.created_entity.direction % 4 == 0 then --vertical
+			switch = event.created_entity.surface.create_entity{
+				name = "circuit-network-switch-v",
+				position = event.created_entity.position,
+				force = event.created_entity.force
+			}
+		else --horizontal
+			switch = event.created_entity.surface.create_entity{
+				name = "circuit-network-switch",
+				position = event.created_entity.position,
+				force = event.created_entity.force
+			}
+		end
+		
 		local res = {
-			switch = event.created_entity,
-			proxies = util.create_proxies(event.created_entity),
+			switch = switch,
+			proxies = util.create_proxies(switch, event.created_entity.direction % 4 == 0),
 			state = true,
-			control_behavior = event.created_entity.get_or_create_control_behavior()
+			control_behavior = switch.get_or_create_control_behavior()
 		}
 		table.insert(global.switches, res)
+		
+		event.created_entity.destroy()
 	end
 end
 
 function on_destroyed(event)
-	if event.entity.name == "circuit-network-switch" then
+	if event.entity.name == "circuit-network-switch" or event.entity.name == "circuit-network-switch-v" then
 		local switch_index = util.find_switch_in_global(event.entity)
 		
 		util.destroy_proxies(global.switches[switch_index])

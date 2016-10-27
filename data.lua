@@ -1,3 +1,24 @@
+local v_sprite = {
+	filename = "__circuit-network-switch__/graphics/switch/vertical-off.png",
+	width = 63,
+	height = 87,
+	frame_count = 1,
+	shift = {0.15, 0},
+}
+local v_sprite_on = util.table.deepcopy(v_sprite)
+v_sprite_on.filename = "__circuit-network-switch__/graphics/switch/vertical-on.png"
+
+local h_sprite = {
+	filename = "__circuit-network-switch__/graphics/switch/horizontal-off.png",
+	width = 105,
+	height = 51,
+	frame_count = 1,
+	scale = 0.95,
+	shift = {0.2, -0.05},
+}
+local h_sprite_on = util.table.deepcopy(h_sprite)
+h_sprite_on.filename = "__circuit-network-switch__/graphics/switch/horizontal-on.png"
+
 data:extend({
 	--proxies for the wires to be switched
 	{
@@ -111,13 +132,13 @@ data:extend({
 			{
 				shadow =
 				{
-					red = {0.15625, -0.28125},
-					green = {0.65625, -0.25}
+					red = {0.21875, -0.1},
+					green = {0.75, -0.1}
 				},
 				wire =
 				{
-					red = {-0.28125, -0.5625},
-					green = {0.21875, -0.5625},
+					red = {-0.35, -0.1},
+					green = {0.35, -0.1}
 				}
 			},
 			{
@@ -140,8 +161,8 @@ data:extend({
 				},
 				wire =
 				{
-					red = {0.28125, 0.15625},
-					green = {-0.21875, 0.15625}
+					red = {0.35, 0.15625},
+					green = {-0.35, 0.15625}
 				}
 			},
 			{
@@ -272,13 +293,13 @@ data:extend({
 			{
 				shadow =
 				{
-					red = {0.15625, -0.28125},
-					green = {0.65625, -0.25}
+					red = {0.25, 0},
+					green = {0.75, 0}
 				},
 				wire =
 				{
-					red = {-0.28125, -0.5625},
-					green = {0.21875, -0.5625},
+					red = {-0.25, -0.1},
+					green = {0.28125, -0.1},
 				}
 			},
 			{
@@ -296,13 +317,13 @@ data:extend({
 			{
 				shadow =
 				{
-					red = {0.75, 0.5625},
-					green = {0.21875, 0.5625}
+					red = {0.25, 0.2},
+					green = {0.75, 0.2}
 				},
 				wire =
 				{
-					red = {0.28125, 0.15625},
-					green = {-0.21875, 0.15625}
+					red = {-0.25, -0.15},
+					green = {0.28125, -0.15}
 				}
 			},
 			{
@@ -325,6 +346,7 @@ data:extend({
 	{
 		type = "lamp",
 		name = "circuit-network-switch",
+		order = "orderman",
 		icon = "__base__/graphics/icons/arithmetic-combinator.png",
 		flags = {"placeable-neutral", "player-creation"},
 		minable = {hardness = 0.2, mining_time = 0.5, result = "circuit-network-switch"},
@@ -340,30 +362,8 @@ data:extend({
 		},
 		energy_usage_per_tick = "1KW",
 		
-		picture_off =
-		{
-			filename = "__circuit-network-switch__/graphics/switch/horizontal-off.png",
-			priority = "high",
-			width = 105,
-			height = 51,
-			frame_count = 1,
-			axially_symmetrical = false,
-			direction_count = 1,
-			scale = 0.9,
-			shift = {0.2, -0.1},
-		},
-		picture_on =
-		{
-			filename = "__circuit-network-switch__/graphics/switch/horizontal-on.png",
-			priority = "high",
-			width = 105,
-			height = 51,
-			frame_count = 1,
-			axially_symmetrical = false,
-			direction_count = 1,
-			scale = 0.9,
-			shift = {0.2, -0.1},
-		},
+		picture_off = h_sprite,
+		picture_on = h_sprite_on,
 
 		circuit_wire_connection_point =
 		{
@@ -387,7 +387,7 @@ data:extend({
 		flags = {"goes-to-quickbar"},
 		subgroup = "circuit-network",
 		order = "a[robot]-b[construction-robot]",
-		place_result = "circuit-network-switch",
+		place_result = "circuit-network-switch-place-proxy",
 		stack_size = 50
 	},
 	{
@@ -402,3 +402,23 @@ data:extend({
 		result = "circuit-network-switch"
 	},
 })
+
+local switch_v = util.table.deepcopy(data.raw["lamp"]["circuit-network-switch"])
+switch_v.name = switch_v.name .. "-v"
+switch_v.collision_box = {{-0.15, -1.15}, {0.15, 1.15}}
+switch_v.picture_off = v_sprite
+switch_v.picture_on = v_sprite_on
+switch_v.circuit_wire_connection_point = {
+	shadow =
+	{
+		red = {0.734375, 0.578125},
+		green = {0.609375, 0.640625},
+	},
+	wire =
+	{
+		red = {-0.25, -0.4},
+		green = {0.25, -0.4},
+	}
+}
+
+data:extend{switch_v}
