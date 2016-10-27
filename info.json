@@ -7,5 +7,5 @@
 	"description": "Like the power switch but with red and green wires. Now with sprites...",
 	"homepage": "http://mods.factorio.com/mods/theRustyKnife/circuit-network-switch",
 	"date": "09.10.2016",
-	"dependencies": []
+	"dependencies": ["base"]
 }
