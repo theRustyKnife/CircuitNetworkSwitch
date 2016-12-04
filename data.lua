@@ -347,7 +347,7 @@ data:extend({
 		type = "lamp",
 		name = "circuit-network-switch",
 		order = "orderman",
-		icon = "__base__/graphics/icons/arithmetic-combinator.png",
+		icon = "__circuit-network-switch__/graphics/icons/switch.png",
 		flags = {"placeable-neutral", "player-creation"},
 		minable = {hardness = 0.2, mining_time = 0.5, result = "circuit-network-switch"},
 		max_health = 55,
@@ -383,7 +383,7 @@ data:extend({
 	{
 		type = "item",
 		name = "circuit-network-switch",
-		icon = "__base__/graphics/icons/arithmetic-combinator.png",
+		icon = "__circuit-network-switch__/graphics/icons/switch.png",
 		flags = {"goes-to-quickbar"},
 		subgroup = "circuit-network",
 		order = "a[robot]-b[construction-robot]",
