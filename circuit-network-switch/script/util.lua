@@ -1,73 +1,63 @@
-local util = {}
+local config = require "config"
 
-function util.destroy_proxies(switch)
-	for _, v in pairs(switch.proxies) do
-		v.out.destroy()
-		v.inner.destroy()
-	end
-end
 
-function util.create_proxies(switch, direction)
-	if direction then
+local _M = {}
+
+
+function _M.create_proxies(entity, vertical)
+	if vertical then
 		return {
-			util.create_proxy(switch, {x = 0, y = 1}, defines.direction.south),
-			util.create_proxy(switch, {x = 0, y = -1}, defines.direction.north)
+			_M.create_proxy(entity, config.PROXY_OFFSET.south, defines.direction.south),
+			_M.create_proxy(entity, config.PROXY_OFFSET.north, defines.direction.north),
+		}
+	else
+		return {
+			_M.create_proxy(entity, config.PROXY_OFFSET.west, defines.direction.west),
+			_M.create_proxy(entity, config.PROXY_OFFSET.east, defines.direction.east),
 		}
 	end
-	return {
-		util.create_proxy(switch, {x = 1, y = 0}, defines.direction.west),
-		util.create_proxy(switch, {x = -1, y = 0}, defines.direction.east)
-	}
 end
 
-function util.create_proxy(switch, offset, direction)
-	local out = switch.surface.create_entity{
-		name = "circuit-network-switch-proxy",
-		position = {switch.position.x + offset.x, switch.position.y + offset.y},
-		force = switch.force
+function _M.create_proxy(entity, offset, direction)
+	local outer = entity.surface.create_entity{
+		name = config.PROXY_OUT_NAME,
+		position = {entity.position.x + offset.x, entity.position.y + offset.y},
+		force = entity.force,
 	}
-	out.destructible = false
-	out.operable = false
-	out.direction = direction
+	outer.destructible = false
+	outer.operable = false
+	outer.minable = false
+	outer.direction = direction
 	
-	local inner = switch.surface.create_entity{
-		name = "circuit-network-switch-proxy-trans",
-		position = {switch.position.x, switch.position.y},
-		force = switch.force
+	local inner = entity.surface.create_entity{
+		name = config.PROXY_IN_NAME,
+		position = entity.position,
+		force = entity.force,
 	}
 	inner.destructible = false
 	inner.operable = false
+	outer.minable = false
 	inner.direction = defines.direction.south
-	if direction == defines.direction.north or direction == defines.direction.south then
-		inner.direction = defines.direction.north
-	end
+	if direction % 4 == 0 then inner.direction = defines.direction.north; end
 	
-	inner.connect_neighbour{target_entity = out, wire = defines.wire_type.red}
-	inner.connect_neighbour{target_entity = out, wire = defines.wire_type.green}
+	inner.connect_neighbour{target_entity = outer, wire = defines.wire_type.red}
+	inner.connect_neighbour{target_entity = outer, wire = defines.wire_type.green}
 	
-	return {out = out, inner = inner}
+	return {outer = outer, inner = inner}
 end
 
-function util.find_switch_in_global(switch)
-	for i, v in pairs(global.switches) do
-		if v.switch == switch then return i end
+function _M.find_switch_in_global(entity)
+	for i, switch in pairs(global.switches) do
+		if switch.entity == entity then return i, switch; end
 	end
 end
 
-function util.are_connected(proxies)
-	local res = {red = false, green = false}
-	
-	--check red  wire
-	for _, v in pairs(proxies[1].circuit_connected_entities.red) do
-		if v == proxies[2] then res.red = true; break; end
+function _M.destroy_proxies(switch)
+	for _, proxy in pairs(switch.proxies) do
+		proxy.outer.destroy()
+		proxy.inner.destroy()
 	end
-	
-	--check green wire
-	for _, v in pairs(proxies[1].circuit_connected_entities.green) do
-		if v == proxies[2] then res.green = true; break; end
-	end
-	
-	return res
 end
 
-return util
+
+return _M
