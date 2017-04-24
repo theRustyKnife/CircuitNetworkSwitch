@@ -9,9 +9,7 @@ FML.global.on_init(function() global.switches = global.switches or {}; end)
 local _M = {}
 
 
-function _M.on_built(event)
-	local entity = event.created_entity
-	
+local function on_built(entity)
 	if entity.name == config.SWITCH_NAME then
 		local switch
 		if entity.direction % 4 == 0 then -- vertical
@@ -30,13 +28,29 @@ function _M.on_built(event)
 		
 		table.insert(global.switches, {
 				entity = switch,
-				proxies = util.create_proxies(entity, event.created_entity.direction % 4 == 0),
+				proxies = util.create_proxies(entity, entity.direction % 4 == 0),
 				state = true,
 				control_behavior = switch.get_or_create_control_behavior(),
 			})
 		
 		entity.destroy()
 	end
+end
+
+function _M.on_built(event)
+	local entity = event.created_entity
+	
+	if entity.name == "entity-ghost" and (entity.ghost_name == config.SWITCH_H_NAME or entity.ghost_name == config.SWITCH_V_NAME) then
+		--TODO: build the proxy ghost
+	end
+	
+	on_built(entity)
+end
+
+function _M.on_robot_built(event)
+	local entity = event.created_entity
+	
+	on_built(entity)
 end
 
 function _M.on_destroyed(event)
